@@ -122,6 +122,9 @@ namespace nt{
   // ---- gcd, lcm ----
   ll gcd(ll a,ll b){return b?gcd(b,a%b):a;}
   ll lcm(ll a,ll b){return a/gcd(a,b)*b;}
+ // Safe gcd, lcm with abs()
+ ll gcd(ll a, ll b){return b?gcd(b,a%b):abs(a);}
+ ll lcm(ll a, ll b){return abs(a/gcd(a,b)*b);}
 
   // ---- binpow, modpow ----
   ll binpow(ll a,ll e){ll r=1;while(e){if(e&1)r*=a;a*=a;e>>=1;}return r;}
