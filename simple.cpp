@@ -22,14 +22,16 @@ typedef long long ll;
 #define deb(x) ((void)0)
 #endif
 
+#define endl '\n'
+#define SUM(v) accumulate(all(v), 0LL)
+
+
 void Solve() {
   // your solution goes here
 }
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(0);
-
+cin.tie(0)->sync_with_stdio(0);
 #ifdef tc_need
   int tc;
   cin >> tc;
