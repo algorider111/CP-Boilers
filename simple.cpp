@@ -28,7 +28,7 @@ void Solve() {
 
 int main() {
     ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    cin.tie(0);
 
 #ifdef tc_need
     int tc;
