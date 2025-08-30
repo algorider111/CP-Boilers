@@ -23,6 +23,23 @@ typedef unsigned long long ull;
 #define lowestbit(x)   ((x) & -(x))            // extract lowest set bit
 #define allbits(x)     ((1ULL << (x)) - 1)     // mask of x bits set
 
+// MoRe Collections if need
+// bits
+#define SET_BIT(n,k)       ((n) |  (1LL<<(k)))
+#define CLEAR_BIT(n,k)     ((n) & ~(1LL<<(k)))
+#define TOGGLE_BIT(n,k)    ((n) ^  (1LL<<(k)))
+#define TOGGLE_ALL_BITS(n) (~(n))
+#define TOGGLE_BIT_CHAR(c) ((c)=='0'?'1':'0')
+#define TOGGLE_ALL_BITS_STR(s) for(char &c:s) c=(c=='0'?'1':'0')
+#define CHECK_BIT(n,k)     (((n)>>(k)) & 1LL)
+#define LSB(x)             ((x) & -(x))
+#define MSB(x)             (63 - __builtin_clzll(x))
+#define BIT_COUNT(x)       (__builtin_popcountll(x))
+#define BIT_LENGTH(x)      (64 - __builtin_clzll(x))
+#define IS_POWER_OF_TWO(x) ((x) && !((x)&((x)-1)))
+#define ALL_BITS_SET(n)    ((1LL<<(n)) - 1)
+#define IS_SUBMASK(a,b)    (((a)&(b))==(a))
+
 /*--------------------------------------------------------------
  | Bitwise Helper Functions
  --------------------------------------------------------------*/
