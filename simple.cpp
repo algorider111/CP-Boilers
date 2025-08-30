@@ -7,10 +7,10 @@
 // #define i_want_bug_free_code
 
 #ifdef i_want_bug_free_code
-#include "algorider/debug.h"  // real debug
+#include "algorider/debug.h"  // Algorider Debug
 #else
-#define debug(...) ((void)0)   // safe dummy
-#define deb(x) ((void)0)       // safe dummy
+#define debug(...) ((void)0)   
+#define deb(x) ((void)0)      
 #endif
 
 #include<iostream>
@@ -21,7 +21,7 @@ using namespace std;
 
 
 // my solution
-void solver() { 
+void Solve() { 
    
 }
 
@@ -32,9 +32,9 @@ int main() {
 #ifdef tc_need
   int t;
   read(t);
-  while (t--) solver();
+  while (t--) Solve();
 #else
-  solver();
+  Solve()
 #endif
   return 0;
 }
