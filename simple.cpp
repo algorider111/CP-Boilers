@@ -8,35 +8,35 @@
 #define rall(x) (x).rbegin(), (x).rend()
 #define sz(x) (int)x.size()
 
+#include <algorithm>  // sort, min, max, reverse
 #include <iostream>
-#include <vector>       // vectors
-#include <algorithm>    // sort, min, max, reverse
+#include <vector>  // vectors
 using namespace std;
 
 typedef long long ll;
 
 #ifdef i_want_bug_free_code
-#include "algorider/debug.h"  
+#include "algorider/debug.h"
 #else
 #define debug(...) ((void)0)
 #define deb(x) ((void)0)
 #endif
 
 void Solve() {
-    // your solution goes here
+  // your solution goes here
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
+  ios::sync_with_stdio(false);
+  cin.tie(0);
 
 #ifdef tc_need
-    int tc;
-    cin >> tc;
-    while (tc--) Solve();
+  int tc;
+  cin >> tc;
+  while (tc--) Solve();
 #else
-    Solve();
+  Solve();
 #endif
 
-    return 0;
+  return 0;
 }
