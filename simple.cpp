@@ -4,6 +4,7 @@
  --------------------------------------------------------------*/
 
 #define tc_need                        // enable test case loop
+#define i_want_bug_free_code           // debug :)
 #define all(x) (x).begin(), (x).end()  // shorthand for containers
 #define rall(x) (x).rbegin(), (x).rend()
 #define sz(x) (int)x.size()
@@ -26,7 +27,7 @@ typedef long long ll;
 #define SUM(v) accumulate(all(v), 0LL)
 
 
-void Solve() {
+void Solve(void) {
   // your solution goes here
 }
 
