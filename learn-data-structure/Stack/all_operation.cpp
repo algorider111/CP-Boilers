@@ -1,23 +1,21 @@
 #include <iostream>
-#define endl '\n'
-
 using namespace std;
 
-const int MAX = 100; // Maximum size of the stack
+const int MAX = 100;
 
-// A simple stack implementation using a fixed-size array
-class Stack {
+// =========================
+// Stack using Array
+// =========================
+class ArrayStack {
 private:
-    int arr[MAX];   // Array to store stack elements
-    int topIndex;   // Index of the top element
+    int arr[MAX];    // Array to store stack elements
+    int topIndex;    // Index of the top element
 
 public:
-    // Constructor: initialize the stack as empty
-    Stack() {
-        topIndex = -1;
-    }
+    ArrayStack() { topIndex = -1; }
 
-    // Push an element onto the stack
+    // Push element on top
+    // Time: O(1)
     void push(int x) {
         if (topIndex >= MAX - 1) {
             cout << "Stack Overflow\n";
@@ -26,7 +24,8 @@ public:
         arr[++topIndex] = x;
     }
 
-    // Remove the top element from the stack
+    // Remove top element
+    // Time: O(1)
     void pop() {
         if (topIndex == -1) {
             cout << "Stack Underflow\n";
@@ -35,7 +34,8 @@ public:
         topIndex--;
     }
 
-    // Return the top element without removing it
+    // Get top element without removing
+    // Time: O(1)
     int peek() {
         if (topIndex == -1) {
             cout << "Stack is empty\n";
@@ -44,23 +44,22 @@ public:
         return arr[topIndex];
     }
 
-    // Check if the stack is empty
-    bool isEmpty() {
-        return topIndex == -1;
-    }
+    // Check if stack is empty
+    // Time: O(1)
+    bool isEmpty() { return topIndex == -1; }
 
-    // Return the current size of the stack
-    int size() {
-        return topIndex + 1;
-    }
+    // Get current size
+    // Time: O(1)
+    int size() { return topIndex + 1; }
 
-    // Print all elements of the stack from top to bottom
+    // Print stack from top to bottom
+    // Time: O(n)
     void printStack() {
         if (topIndex == -1) {
             cout << "Stack is empty\n";
             return;
         }
-        cout << "Stack elements (top → bottom): ";
+        cout << "Stack (top --> bottom): ";
         for (int i = topIndex; i >= 0; --i) {
             cout << arr[i] << ' ';
         }
@@ -68,22 +67,100 @@ public:
     }
 };
 
+// =========================
+// Stack using Linked List
+// =========================
+struct Node {
+    int data;
+    Node* next;
+};
+
+class LinkedListStack {
+private:
+    Node* topNode; // Pointer to top node
+
+public:
+    LinkedListStack() { topNode = nullptr; }
+
+    // Push element on top
+    // Time: O(1)
+    void push(int x) {
+        Node* newNode = new Node();
+        newNode->data = x;
+        newNode->next = topNode;
+        topNode = newNode;
+    }
+
+    // Remove top element
+    // Time: O(1)
+    void pop() {
+        if (topNode == nullptr) {
+            cout << "Stack Underflow\n";
+            return;
+        }
+        Node* temp = topNode;
+        topNode = topNode->next;
+        delete temp;
+    }
+
+    // Get top element without removing
+    // Time: O(1)
+    int peek() {
+        if (topNode == nullptr) {
+            cout << "Stack is empty\n";
+            return -1;
+        }
+        return topNode->data;
+    }
+
+    // Check if stack is empty
+    // Time: O(1)
+    bool isEmpty() { return topNode == nullptr; }
+
+    // Print stack from top to bottom
+    // Time: O(n)
+    void printStack() {
+        if (topNode == nullptr) {
+            cout << "Stack is empty\n";
+            return;
+        }
+        cout << "Stack (top --> bottom): ";
+        Node* temp = topNode;
+        while (temp != nullptr) {
+            cout << temp->data << ' ';
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+
+
 int main() {
-    Stack st;
+    cout << "Array Stack Example:\n";
+    ArrayStack aSt;
+    aSt.push(45);
+    aSt.push(25);
+    aSt.push(8);
+    aSt.printStack();    // Output: 8 25 45 (top --> bottom)
 
-    // Example usage
-    st.push(10);
-    st.push(20);
-    st.push(30);
-    st.push(25);
+    aSt.pop();
+    aSt.printStack();    // Output: 25 45
+    cout << "Top element: " << aSt.peek() << endl; // 25
+    cout << "Is empty? " << (aSt.isEmpty() ? "Yes" : "No") << endl; // No
+    cout << "Size: " << aSt.size() << endl; // 2
 
-    st.printStack();             // Stack elements (top -> bottom): 30 20 10
-    cout << "Top element: " << st.peek() << endl; // Top element: 30
-    cout << "Stack size: " << st.size() << endl; // Stack size: 3
+    cout << "\nLinked List Stack Example:\n";
+    LinkedListStack lSt;
+    lSt.push(100);
+    lSt.push(200);
+    lSt.push(300);
+    lSt.printStack();    // Output: 300 200 100
 
-    // st.pop();
-    st.printStack();             // Stack elements (top -> bottom): 20 10
-    cout << "Is stack empty? " << (st.isEmpty() ? "Yes" : "No") << endl; // No
+    lSt.pop();
+    lSt.printStack();    // Output: 200 100
+    cout << "Top element: " << lSt.peek() << endl; // 200
+    cout << "Is empty? " << (lSt.isEmpty() ? "Yes" : "No") << endl; // No
 
     return 0;
 }
