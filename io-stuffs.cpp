@@ -1,3 +1,9 @@
+// all vec elements are same - support for all types of data 
+
+template<typename T>
+bool allEqual(const std::vector<T>& v){return sz(v)<2||std::adjacent_find(all(v),std::not_equal_to<T>())==v.end();}
+
+
 // io stuff -- general
 template <typename T> void read(T &x){cin>>x;}
 template <typename T, typename... Args> void read(T &f, Args&... r){cin>>f; read(r...);}
