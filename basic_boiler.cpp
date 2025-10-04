@@ -9,24 +9,22 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
+#define i_want_bug_free_code // debug 
+#ifdef i_want_bug_free_code
+#include "algorider/debug.h"
+#else
+#define debug(...) ((void)0)
+#define deb(x) ((void)0)
+#endif
+
+
 void Solve(void) { 
-  // Solution goes here
+  // Solution Goes here
 }
 
 int main() {
   cin.tie(0)->sync_with_stdio(0);
-
-// #ifndef ONLINE_JUDGE
-//   freopen("in.txt", "r", stdin);
-//   freopen("out.txt", "w", stdout);
-//   freopen("err.txt", "w", stderr);
-// #endif
-
-#ifdef TC
-  for (int tc = (cin >> tc, tc); tc--;) Solve();
-#else
-  Solve();
-#endif
-
+  int tc; cin >> tc;
+  while(tc--) Solve();
   return 0;
 }
