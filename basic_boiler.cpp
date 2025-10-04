@@ -16,11 +16,11 @@ void Solve(void) {
 int main() {
   cin.tie(0)->sync_with_stdio(0);
 
-#ifndef ONLINE_JUDGE
-  freopen("in.txt", "r", stdin);
-  freopen("out.txt", "w", stdout);
-  freopen("err.txt", "w", stderr);
-#endif
+// #ifndef ONLINE_JUDGE
+//   freopen("in.txt", "r", stdin);
+//   freopen("out.txt", "w", stdout);
+//   freopen("err.txt", "w", stderr);
+// #endif
 
 #ifdef TC
   for (int tc = (cin >> tc, tc); tc--;) Solve();
