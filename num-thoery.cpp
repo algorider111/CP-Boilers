@@ -27,8 +27,6 @@ T gcd_array(const vector<T>& arr) {
 }
 
 // GCD of array difference a[0] - a[i]
-#include <bits/stdc++.h>
-using namespace std;
 
 template<typename T>
 inline T fast_gcd(T a,T b){while(b){a%=b;swap(a,b);}return a;}
