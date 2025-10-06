@@ -51,7 +51,7 @@ T gcd_of_differences(const vector<T>& a){
 
 
 // ---------------- GCD / LCM ----------------
-ll gcd(ll a,ll b){return b?gcd(b,a%b)abs(a);}
+ll gcd(ll a,ll b){return b?gcd(b,a%b:abs(a);}
 ll lcm(ll a,ll b){return abs(a/gcd(a,b)*b);}
 bool coprime(ll a,ll b){return gcd(a,b)==1;}
 
