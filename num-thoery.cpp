@@ -26,6 +26,31 @@ T gcd_array(const vector<T>& arr) {
     return g;
 }
 
+// GCD of array difference a[0] - a[i]
+#include <bits/stdc++.h>
+using namespace std;
+
+template<typename T>
+inline T fast_gcd(T a,T b){while(b){a%=b;swap(a,b);}return a;}
+
+template<typename T>
+T gcd_of_differences(const vector<T>& a){
+    int n=a.size();
+    if(n<=1) return 0;  // no difference
+    T g=0;
+    for(int i=1;i<n;++i){
+        g=fast_gcd(g, abs(a[i]-a[0]));
+        if(g==1) return 1; // early stop
+    }
+    return g;
+}
+// Example
+// int main(){
+//     vector<long long> a={10,14,22,34};
+//     cout<<gcd_of_differences(a)<<"\n"; // Output: 2
+// }
+
+
 
 // ---------------- GCD / LCM ----------------
 ll gcd(ll a,ll b){return b?gcd(b,a%b)abs(a);}
