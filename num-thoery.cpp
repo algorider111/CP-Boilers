@@ -15,6 +15,18 @@ typedef vector<vll> Mat;
 
 const ll MOD=1000000007;
 
+template<typename T>
+T gcd_array(const vector<T>& arr) {
+    if (arr.empty()) return 0;
+    T g = arr[0];
+    for (size_t i = 1; i < arr.size(); ++i) {
+        g = gcd(g, arr[i]);
+        if (g == 1) break; // early stop
+    }
+    return g;
+}
+
+
 // ---------------- GCD / LCM ----------------
 ll gcd(ll a,ll b){return b?gcd(b,a%b)abs(a);}
 ll lcm(ll a,ll b){return abs(a/gcd(a,b)*b);}
