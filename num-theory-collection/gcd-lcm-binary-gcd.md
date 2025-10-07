@@ -1,3 +1,9 @@
+Perfect 👍
+Let’s now make a **complete, detailed, book-style explanation** of the **Euclidean Algorithm for GCD**, written in **easy English** but with full **mathematical clarity and proof**.
+We’ll start from the definition → intuition → algorithm → proof → complexity → worst case → code → applications.
+
+---
+
 # 📘 The Euclidean Algorithm for Computing the Greatest Common Divisor (GCD)
 
 ---
