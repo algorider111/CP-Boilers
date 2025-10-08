@@ -9,7 +9,7 @@ using namespace std;
 #define endl '\n'
 typedef long long ll;
 
-#define i_want_bug_free_code // debug 
+// #define i_want_bug_free_code // :)debug 
 #ifdef i_want_bug_free_code
 #include "algorider/debug.h"
 #else
