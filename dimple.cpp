@@ -5,8 +5,10 @@
 
 // C:\Users\Ahnaf
 
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
-#pragma GCC optimize("Ofast,unroll-loops,fast-math,O3")
+#pragma GCC optimize("Ofast")            
+#pragma GCC optimize("unroll-loops")     
+#pragma GCC target("avx,avx2,fma")       
+#pragma GCC diagnostic ignored "-Wunused-variable" 
 
 #include <bits/stdc++.h>
 using namespace std;
