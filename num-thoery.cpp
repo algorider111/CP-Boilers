@@ -56,6 +56,35 @@ ll lcm(ll a,ll b){return abs(a/gcd(a,b)*b);}
 bool coprime(ll a,ll b){return gcd(a,b)==1;}
 
 // ---------------- Binary Exponentiation ----------------
+
+
+// Note: The following version is compatible with g++ (C++17).
+// My default Windows 10 compiler does not fully support the original template code.
+
+ll modmul(ll a, ll b, ll m = MOD) {
+    ll res = 0;
+    a %= m;
+    b %= m;
+    while (b) {
+        if (b & 1) res = (res + a) % m;
+        a = (a * 2) % m;
+        b >>= 1;
+    }
+    return res;
+}
+
+ll modpow(ll a, ll e, ll m = MOD) {
+    ll r = 1;
+    while (e) {
+        if (e & 1) r = modmul(r, a, m);
+        a = modmul(a, a, m);
+        e >>= 1;
+    }
+    return r;
+}
+
+
+
 ll binpow(ll a,ll e){ll r=1; while(e){if(e&1) r*=a; a*=a; e>>=1;} return r;}
 ll modpow(ll a,ll e,ll m=MOD){ll r=1; while(e){if(e&1) r=(__int128)r*a%m; a=(__int128)a*a%m; e>>=1;} return r;}
 
