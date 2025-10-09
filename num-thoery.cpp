@@ -340,3 +340,99 @@ vector<ll> divisor_sum_prefix(int n){
     return d;
 }
 
+// ------------------------------------------------------------
+// Self-Test: Verify Core Functions of the Number Theory Toolkit
+// ------------------------------------------------------------
+void test_all_utils() {
+    cout << "---------- Number Theory & Matrix Library Test ----------\n\n";
+
+    // --- GCD / LCM ---
+    cout << "[GCD/LCM]\n";
+    cout << "gcd(48,18) = " << gcd(48,18) << "  (expected 6)\n";
+    cout << "lcm(12,18) = " << lcm(12,18) << "  (expected 36)\n";
+    cout << "coprime(7,20) = " << coprime(7,20) << "\n\n";
+
+    // --- Modular arithmetic ---
+    cout << "[Modular Arithmetic]\n";
+    cout << "modpow(3,5,1e9+7) = " << modpow(3,5) << "  (expected 243)\n";
+    cout << "modinv(3) = " << modinv(3) << "  (check 3*x % MOD == 1)\n";
+    cout << "divm(10,2) = " << divm(10,2) << "\n\n";
+
+    // --- Factorial / Combinatorics ---
+    init_fact(10);
+    cout << "[Factorials / Combinatorics]\n";
+    cout << "fact[5] = " << fact[5] << "  (expected 120)\n";
+    cout << "nCr(10,3) = " << nCr(10,3) << "  (expected 120)\n";
+    cout << "nPr(10,3) = " << nPr(10,3) << "  (expected 720)\n";
+    cout << "nHr(5,3) = " << nHr(5,3) << "  (expected 35)\n";
+    vll ks = {2,1,2};
+    cout << "multinomial({2,1,2}) = " << multinomial(ks) << "\n\n";
+
+    // --- GCD of Array ---
+    vector<ll> arr = {10, 14, 22, 34};
+    cout << "[GCD of Array / Differences]\n";
+    cout << "gcd_array(arr) = " << gcd_array(arr) << "\n";
+    cout << "gcd_of_differences(arr) = " << gcd_of_differences(arr) << "\n\n";
+
+    // --- Binary GCD ---
+    cout << "[Binary GCD]\n";
+    cout << "binary_gcd(48,18) = " << binary_gcd(48,18) << "  (expected 6)\n\n";
+
+    // --- Segmented Sieve ---
+    cout << "[Segmented Sieve 10..30]\n";
+    auto segp = seg_sieve(10,30);
+    for(auto p:segp) cout << p << " ";
+    cout << "\n\n";
+
+    // --- Factorization / Divisors ---
+    cout << "[Factorization / Divisors]\n";
+    auto f = factorize_ll(360);
+    cout << "360 = ";
+    for(auto [p,e]:f) cout << p << "^" << e << " ";
+    cout << "\nDivisors of 36: ";
+    auto d = divisors(36);
+    for(auto x:d) cout << x << " ";
+    cout << "\n\n";
+
+    // --- Euler Phi & Möbius ---
+    precompute_phi_mu();
+    cout << "[Euler Phi & Möbius]\n";
+    cout << "phi(36) = " << phi_sieve[36] << "  (expected 12)\n";
+    cout << "mu(36) = " << mu_sieve[36] << "  (expected 0)\n\n";
+
+    // --- Fibonacci ---
+    cout << "[Fibonacci]\n";
+    cout << "fib(10) = " << fib(10) << "  (expected 55)\n";
+    cout << "fib_fast(10) = " << fib_fast(10) << "  (expected 55)\n\n";
+
+    // --- Modular Linear Equation ---
+    cout << "[Modular Linear Equation]\n";
+    cout << "Solve 3x ≡ 4 (mod 7): x = " << mod_linear(3,4,7)
+         << "  (check: (3*x)%7 == 4)\n\n";
+
+    // --- Lucas Theorem ---
+    cout << "[Lucas Theorem]\n";
+    cout << "nCr_lucas(1000,20,MOD) = " << nCr_lucas(1000,20) << "\n\n";
+
+    // --- Geometric Series Mod ---
+    cout << "[Geometric Series Mod]\n";
+    cout << "1 + 2 + 4 + 8 + 16 (mod 1e9+7) = " << modgeom(2,5) << " (expected 31)\n\n";
+
+    // --- Integer sqrt / is_square ---
+    cout << "[Integer sqrt / Perfect square]\n";
+    cout << "isqrt(50) = " << isqrt(50) << "  (expected 7)\n";
+    cout << "is_square(49) = " << is_square(49) << "\n";
+    cout << "is_square(50) = " << is_square(50) << "\n\n";
+
+    // --- Matrix Exponentiation / Fibonacci check ---
+    cout << "[Matrix Power Test]\n";
+    Mat F = {{1,1},{1,0}};
+    Mat R = mat_pow(F, 10);
+    cout << "F^10 (mod 1e9+7):\n";
+    for(auto &row:R){ for(auto x:row) cout << x << " "; cout << "\n"; }
+
+    cout << "\n---------- End of Test ----------\n";
+}
+
+// Optional: Run when needed
+// int main() { ios::sync_with_stdio(false); cin.tie(nullptr); test_all_utils(); }
