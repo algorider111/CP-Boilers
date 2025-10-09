@@ -178,3 +178,165 @@ ll fib(ll n,ll m=MOD){if(n==0) return 0; Mat F={{1,1},{1,0}}; Mat R=mat_pow(F,n-
 ll ceil_div(ll a,ll b){return (a+b-1)/b;}
 ll floor_div(ll a,ll b){return a/b;}
 bool is_power_of_two(ll n){return n>0 && (n&(n-1))==0;}
+
+// More useful stuff v2
+
+// ---------------- Modular Utilities ----------------
+inline ll norm(ll a,ll m=MOD){a%=m; if(a<0) a+=m; return a;}
+inline ll modadd(ll a,ll b,ll m=MOD){a+=b; if(a>=m) a-=m; return a;}
+inline ll modsub(ll a,ll b,ll m=MOD){a-=b; if(a<0) a+=m; return a;}
+inline ll modmul(ll a,ll b,ll m=MOD){return (__int128)a*b%m;}
+inline ll modpow_sum(ll a,ll n,ll m=MOD){ // (1 + a + a^2 + ... + a^(n-1))
+    if(n==0) return 0;
+    if(n==1) return 1;
+    if(n%2) return (1 + a*modpow_sum(a,n-1,m))%m;
+    ll half=modpow_sum(a,n/2,m);
+    ll p=modpow(a,n/2,m);
+    return (half + modmul(half,p,m))%m;
+}
+
+// ---------------- Binary GCD (Stein's Algorithm) ----------------
+ll binary_gcd(ll a,ll b){
+    if(!a) return abs(b);
+    if(!b) return abs(a);
+    int shift=__builtin_ctzll(a|b);
+    a>>=__builtin_ctzll(a);
+    do {
+        b>>=__builtin_ctzll(b);
+        if(a>b) swap(a,b);
+        b-=a;
+    } while(b);
+    return a<<shift;
+}
+
+// ---------------- Segmented Sieve ----------------
+vll seg_sieve(ll L,ll R){
+    ll lim = sqrt(R)+1;
+    vector<bool> mark(R-L+1,true);
+    vector<bool> base(lim+1,false);
+    vector<ll> ps;
+    for(ll i=2;i<=lim;i++) if(!base[i]){
+        ps.push_back(i);
+        for(ll j=i*i;j<=lim;j+=i) base[j]=true;
+    }
+    for(ll p:ps){
+        for(ll j=max(p*p,(L+p-1)/p*p);j<=R;j+=p)
+            mark[j-L]=false;
+    }
+    if(L==1) mark[0]=false;
+    vll primes;
+    for(ll i=0;i<=R-L;i++) if(mark[i]) primes.push_back(L+i);
+    return primes;
+}
+
+// ---------------- Factorization (unordered_map version) ----------------
+map<ll,int> factorize_ll(ll n){
+    map<ll,int> f;
+    while(n>1 && n%2==0){f[2]++; n/=2;}
+    for(ll i=3;i*i<=n;i+=2){
+        while(n%i==0){f[i]++; n/=i;}
+    }
+    if(n>1) f[n]++;
+    return f;
+}
+
+// ---------------- All Divisors ----------------
+vll divisors(ll n){
+    vll d;
+    for(ll i=1;i*i<=n;i++){
+        if(n%i==0){
+            d.push_back(i);
+            if(i*i!=n) d.push_back(n/i);
+        }
+    }
+    sort(d.begin(),d.end());
+    return d;
+}
+
+// ---------------- Sieve for Totient & Möbius ----------------
+const int MAXN = 1e6+5;
+int phi_sieve[MAXN], mu_sieve[MAXN];
+bool comp_sieve[MAXN];
+void precompute_phi_mu(){
+    for(int i=1;i<MAXN;i++) phi_sieve[i]=i, mu_sieve[i]=1;
+    for(int i=2;i<MAXN;i++){
+        if(!comp_sieve[i]){
+            for(int j=i;j<MAXN;j+=i){
+                comp_sieve[j]=1;
+                phi_sieve[j]=phi_sieve[j]/i*(i-1);
+                mu_sieve[j]*=-1;
+            }
+            for(long long j=1LL*i*i;j<MAXN;j+=1LL*i*i)
+                mu_sieve[j]=0;
+        }
+    }
+}
+
+// ---------------- Fibonacci (Fast Doubling) ----------------
+pair<ll,ll> fib_doubling(ll n,ll m=MOD){
+    if(n==0) return {0,1};
+    auto [a,b]=fib_doubling(n>>1,m);
+    ll c=modmul(a,(2*b% m - a + m)%m,m);
+    ll d=(modmul(a,a,m)+modmul(b,b,m))%m;
+    if(n&1) return {d,(c+d)%m};
+    else return {c,d};
+}
+ll fib_fast(ll n,ll m=MOD){return fib_doubling(n,m).first;}
+
+// ---------------- Modular Geometric Sum ----------------
+// Sum = a^0 + a^1 + ... + a^(n-1)
+ll modgeom(ll a,ll n,ll m=MOD){
+    if(n==0) return 0;
+    if(n==1) return 1;
+    if(n%2==0){
+        ll half=modgeom(a,n/2,m);
+        ll p=modpow(a,n/2,m);
+        return modmul(half,modadd(1,p,m),m);
+    }else{
+        return modadd(1,modmul(a,modgeom(a,n-1,m),m),m);
+    }
+}
+
+// ---------------- Modular Linear Equation: ax ≡ b (mod m) ----------------
+ll mod_linear(ll a,ll b,ll m){
+    ll x,y,g=extgcd(a,m,x,y);
+    if(b%g!=0) return -1; // no solution
+    x = (x * (b/g)) % m;
+    return (x%m+m)%m;
+}
+
+// ---------------- Lucas Theorem (nCr mod prime) ----------------
+ll nCr_lucas(ll n,ll r,ll p=MOD){
+    if(r==0) return 1;
+    return (nCr_lucas(n/p,r/p,p)*nCr(n%p,r%p,p))%p;
+}
+
+// ---------------- Modular Equation Solver (for a set) ----------------
+vector<ll> solve_congruences(vll a,vll m){
+    // all mod not necessarily coprime
+    // pairwise reduce using CRT for coprime sets only
+    return {}; // to-do: placeholder if needed
+}
+
+// ---------------- Perfect Square / Integer sqrt ----------------
+ll isqrt(ll n){
+    ll x = sqrtl(n);
+    while(x*x > n) --x;
+    while((x+1)*(x+1) <= n) ++x;
+    return x;
+}
+bool is_square(ll n){
+    if(n<0) return false;
+    ll r=isqrt(n);
+    return r*r==n;
+}
+
+// ---------------- Sum of Divisors up to N ----------------
+vector<ll> divisor_sum_prefix(int n){
+    vector<ll> d(n+1,0);
+    for(int i=1;i<=n;i++)
+        for(int j=i;j<=n;j+=i)
+            d[j]+=i;
+    return d;
+}
+
