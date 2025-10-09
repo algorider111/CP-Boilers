@@ -3,8 +3,8 @@
 // Author : Algorider
 //---------------------------------------------
 
-// /home/Ahnaf
-// /home/Ahnaf/templates_v1
+// /User/Ahnaf
+// /User/Ahnaf/templates_v1
 
 
 #pragma GCC optimize("Ofast")                  
