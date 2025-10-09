@@ -32,6 +32,7 @@ typedef long long ll;
 void Solve(void) { 
   // Write your logic here
 }
+
 int main() {
   cin.tie(0)->sync_with_stdio(0);
   int tc; cin >> tc;
