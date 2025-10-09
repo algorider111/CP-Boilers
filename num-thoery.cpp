@@ -340,6 +340,96 @@ vector<ll> divisor_sum_prefix(int n){
     return d;
 }
 
+
+// Harmonic Stuff
+// ---------- Harmonic Series ----------
+double harmonic(int n) {
+    double sum = 0.0;
+    for (int i = 1; i <= n; ++i) sum += 1.0 / i;
+    return sum;
+}
+
+double harmonicApprox(int n) {
+    const double gamma = 0.5772156649015328606;
+    return log(n) + gamma;
+}
+
+// ---------- Probability ----------
+double probability(int favorable, int total) {
+    return (double)favorable / total;
+}
+
+double conditionalProb(double pA_and_B, double pB) {
+    return pA_and_B / pB;
+}
+
+double expectedValue(const vector<double>& values, const vector<double>& probs) {
+    double E = 0.0;
+    for (int i = 0; i < values.size(); ++i)
+        E += values[i] * probs[i];
+    return E;
+}
+
+double binomialProb(int n, int r, double p) {
+    double comb = 1;
+    for (int i = 1; i <= r; ++i)
+        comb *= (n - i + 1) / (double)i;
+    return comb * pow(p, r) * pow(1 - p, n - r);
+}
+
+// ---------- Statistics ----------
+double mean(const vector<double>& v) {
+    double sum = 0;
+    for (double x : v) sum += x;
+    return sum / v.size();
+}
+
+double median(vector<double> v) {
+    sort(v.begin(), v.end());
+    int n = v.size();
+    if (n % 2) return v[n/2];
+    return (v[n/2 - 1] + v[n/2]) / 2.0;
+}
+
+double mode(const vector<double>& v) {
+    unordered_map<double, int> freq;
+    for (double x : v) freq[x]++;
+    double modeVal = v[0];
+    int maxFreq = 0;
+    for (auto& [x, f] : freq)
+        if (f > maxFreq) maxFreq = f, modeVal = x;
+    return modeVal;
+}
+
+double variance(const vector<double>& v) {
+    double m = mean(v);
+    double sum = 0;
+    for (double x : v) sum += (x - m) * (x - m);
+    return sum / v.size();
+}
+
+double stddev(const vector<double>& v) {
+    return sqrt(variance(v));
+}
+
+vector<double> normalize(vector<double> v) {
+    double total = accumulate(v.begin(), v.end(), 0.0);
+    for (double &x : v) x /= total;
+    return v;
+}
+
+double correlation(const vector<double>& x, const vector<double>& y) {
+    int n = x.size();
+    double meanX = mean(x), meanY = mean(y);
+    double num = 0, denX = 0, denY = 0;
+    for (int i = 0; i < n; ++i) {
+        num += (x[i] - meanX) * (y[i] - meanY);
+        denX += (x[i] - meanX) * (x[i] - meanX);
+        denY += (y[i] - meanY) * (y[i] - meanY);
+    }
+    return num / sqrt(denX * denY);
+}
+
 // ------------------------------------------------------------
 // Self-Test: Verify Core Functions of the Number Theory Toolkit
 // ------------------------------------------------------------
