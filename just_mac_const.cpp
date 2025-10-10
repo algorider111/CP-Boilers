@@ -101,6 +101,18 @@ const int dy[8] = {0,1,0,-1,-1,1,-1,1};
 // Fast IO
 #define FASTIO ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
 
+bool allElEq(const vector<int>&v) {
+  if(v.empty() || sz(v) == 1) return true;
+  return adjacent_find(all(v), not_equal_to<int>()) == v.end();
+}
+
+bool all_even(int x, int y, int z) {
+    return !(x & 1) && !(y & 1) && !(z & 1);
+}
+
+
+
+
 /*--------------------------------------------------------------
  | Implementation Helpers
  --------------------------------------------------------------*/
